@@ -1,0 +1,10 @@
+{
+  "python.analysis.disabled": [
+    "unresolved-import"
+  ],
+  "python.jediEnabled": true,
+  "python.pythonPath": "C:\\Users\\Jakub\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
+  "python.formatting.autopep8Args": [
+    "--max-line-length=200"
+  ]
+}
