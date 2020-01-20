@@ -163,20 +163,42 @@ def run(graphPath, populationSize, iterations, tournamentSize, selectionProbabil
 
     bestFitness = float("inf")
 
+    timeSelection = 0
+    timeBreeding = 0
+    timeMutation = 0
+
     for i in range(iterations):
+        
+        timeBeforeFitness = timeit.default_timer()
         populationFitness = getPopulationFitness(distances, population)
+        timeFitness = (timeit.default_timer() - timeBeforeFitness)
+
 
         bestFitnessInGeneration = min(populationFitness)
         if bestFitness > bestFitnessInGeneration:
             bestFitness = bestFitnessInGeneration
             bestFitnessInGenerationIndex = populationFitness.index(bestFitnessInGeneration)
             print("\nBEST FITNESS: ", bestFitness)
-            print("SPECIMEN: ", population[bestFitnessInGenerationIndex])
+            # print("SPECIMEN: ", population[bestFitnessInGenerationIndex])
+            # print("Fitness Calculation Time", timeFitness)
+            # print("Selection Time", timeSelection)
+            # print("Breeding Time", timeBreeding)
+            # print("Mutation Time", timeMutation)
 
+        # Selection
+        timeBeforeSelection = timeit.default_timer()
         population = select(population, populationFitness, tournamentSize, selectionProbability)
-        population = breed(population, breedingProbability)
-        population = mutate(population, mutationProbability)
+        timeSelection = (timeit.default_timer() - timeBeforeSelection)
 
+        # Breeding
+        timeBeforeBreeding = timeit.default_timer()
+        population = breed(population, breedingProbability)
+        timeBreeding = (timeit.default_timer() - timeBeforeBreeding)
+
+        # Mutation
+        timeBeforeMutation = timeit.default_timer()
+        population = mutate(population, mutationProbability)
+        timeMutation = (timeit.default_timer() - timeBeforeMutation)
        
 
     timeStop = timeit.default_timer()
@@ -186,11 +208,11 @@ def run(graphPath, populationSize, iterations, tournamentSize, selectionProbabil
 
 
 run(
-    graphPath="graphs/berlin52.txt",
-    populationSize=2000,
-    iterations=50001,
-    tournamentSize=4,
+    graphPath="graphs/pr1002.txt",
+    populationSize=100,
+    iterations=100000,
+    tournamentSize=5,
     selectionProbability=1,
     breedingProbability=1,
-    mutationProbability=0.05
+    mutationProbability=0.1
 )
