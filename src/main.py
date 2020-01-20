@@ -53,6 +53,7 @@ def getPopulationFitness(distances, population):
 
     return populationFitness
 
+
 def getSpecimenFitness(distances, specimen):
     fitness = 0
 
@@ -62,6 +63,7 @@ def getSpecimenFitness(distances, specimen):
     fitness += distances[specimen[specimenSize - 1]][specimen[0]]
 
     return fitness
+
 
 def select(population, populationFitness, tournamentSize, selectionProbability):
     populationAfterSelection = []
@@ -168,11 +170,10 @@ def run(graphPath, populationSize, iterations, tournamentSize, selectionProbabil
     timeMutation = 0
 
     for i in range(iterations):
-        
+
         timeBeforeFitness = timeit.default_timer()
         populationFitness = getPopulationFitness(distances, population)
         timeFitness = (timeit.default_timer() - timeBeforeFitness)
-
 
         bestFitnessInGeneration = min(populationFitness)
         if bestFitness > bestFitnessInGeneration:
@@ -199,7 +200,6 @@ def run(graphPath, populationSize, iterations, tournamentSize, selectionProbabil
         timeBeforeMutation = timeit.default_timer()
         population = mutate(population, mutationProbability)
         timeMutation = (timeit.default_timer() - timeBeforeMutation)
-       
 
     timeStop = timeit.default_timer()
 
