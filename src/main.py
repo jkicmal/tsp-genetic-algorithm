@@ -6,31 +6,20 @@ from breeding.breeding2 import breedNewPopulation
 from selection.tournament import select
 from mutation.reverse import mutatePopulation
 from fitness.fitnessCalculator import getPopulationFitness
-from readers.file import readDistancesFromFile
-
-
-def createInitialPopulation(populationSize, specimenSize):
-    population = []
-
-    for _ in range(populationSize):
-        specimen = [i for i in range(specimenSize)]
-        random.shuffle(specimen)
-        population.append(specimen)
-
-    return population
+from initialization import readDistancesFromFile, createInitialPopulation
 
 
 def run(graphPath, populationSize, iterations, tournamentSize, selectionProbability, breedingProbability, mutationProbability):
     distances = readDistancesFromFile(graphPath)
     population = createInitialPopulation(populationSize, specimenSize=len(distances))
 
-    timeStart = timeit.default_timer()
+    # timeStart = timeit.default_timer()
 
     bestFitness = float("inf")
 
-    timeSelection = 0
-    timeBreeding = 0
-    timeMutation = 0
+    # timeSelection = 0
+    # timeBreeding = 0
+    # timeMutation = 0
 
     for i in range(iterations):
 
@@ -45,8 +34,8 @@ def run(graphPath, populationSize, iterations, tournamentSize, selectionProbabil
             # Best Fitness
             bestFitness = bestFitnessInGeneration
             bestFitnessInGenerationIndex = populationFitness.index(bestFitnessInGeneration)
-            print("\nBEST FITNESS: ", bestFitness)
-            print("SPECIMEN: ", population[bestFitnessInGenerationIndex])
+            print("BEST FITNESS: ", bestFitness)
+            # print("SPECIMEN: ", population[bestFitnessInGenerationIndex])
 
             # PRINT Times
             # print("Fitness Calculation Time", timeFitness)
@@ -79,11 +68,11 @@ def run(graphPath, populationSize, iterations, tournamentSize, selectionProbabil
 
 
 run(
-    graphPath="graphs/berlin52.txt",
+    graphPath="graphs/pr1002.txt",
     populationSize=50,
-    iterations=100000,
-    tournamentSize=5,
+    iterations=99999999999999,
+    tournamentSize=3,
     selectionProbability=1,
-    breedingProbability=0.9,
-    mutationProbability=0.05
+    breedingProbability=0.75,
+    mutationProbability=0.03
 )

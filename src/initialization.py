@@ -1,3 +1,6 @@
+import random
+
+
 def readDistancesFromFile(path):
     file = open(path)
 
@@ -23,3 +26,14 @@ def readDistancesFromFile(path):
             distances[j][i] = value
 
     return distances
+
+
+def createInitialPopulation(populationSize, specimenSize):
+    population = []
+
+    for _ in range(populationSize):
+        specimen = [i for i in range(specimenSize)]
+        random.shuffle(specimen)
+        population.append(specimen)
+
+    return population
